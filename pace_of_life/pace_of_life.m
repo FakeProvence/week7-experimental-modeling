@@ -5,3 +5,29 @@
 
 % 加载数据
 load pace.mat;
+
+logv = log(V);
+logp = log(P);
+
+% fit line
+[a, c] = fit_line(logp, logv);
+
+subplot(1, 2, 1);
+hold on;
+t = linspace(min(logp), max(logp), 100);
+plot(logp, logv, 'rs', 'MarkerFaceColor', 'r');
+plot(logp, a * logp + c, 'bo', 'MarkerFaceColor', 'b');
+plot(t, a * t + c, 'b-');
+title('城市步速');
+xlabel('log(P)');
+ylabel('log(V)');
+
+subplot(1, 2, 2);
+hold on;
+t = linspace(min(P), max(P), 100);
+plot(P, V, 'rs', 'MarkerFaceColor', 'r');
+plot(P, exp(c) * P.^a, 'bo', 'MarkerFaceColor', 'b');
+plot(t, exp(c) * t.^a, 'b-');
+title('城市步速');
+xlabel('P');
+ylabel('V');
