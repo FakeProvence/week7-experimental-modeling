@@ -6,15 +6,15 @@
 load 'cricket_chirps';
 
 % 高阶多项式
-ph = lagrange(X, Y);
+ph = sym_lagrange(X, Y);
 % 线性模型
 pl = polyfit(X, Y, 1);
 
-yh = polyval(ph, X);    %高阶拟合点
+yh = subs(ph, X);    %高阶拟合点
 yl = polyval(pl, X);    %低阶拟合点
 
 t = linspace(min(X), max(X), 100);
-th = polyval(ph, t);    %高阶拟合曲线
+th = subs(ph, t);    %高阶拟合曲线
 tl = polyval(pl, t);    %低阶拟合曲线
 
 subplot(2, 1, 1);
