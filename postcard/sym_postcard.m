@@ -16,14 +16,14 @@ Y = Y2 - 1898;
 P = P2;
 
 % 下面进行拟合
-ph = lagrange(Y, P);
+ph = sym_lagrange(Y, P);
 pl = polyfit(Y, P, 2);   %这里采用二次模型
 
-yh = polyval(ph, Y);     %高阶拟合点
+yh = subs(ph, Y);     %高阶拟合点
 yl = polyval(pl, Y);     %低阶拟合点
 
 t = linspace(min(Y), max(Y), 100);
-th = polyval(ph, t);     %高阶拟合曲线
+th = subs(ph, t);     %高阶拟合曲线
 tl = polyval(pl, t);     %低阶拟合曲线
 tt = spline(Y, P, t);    %三次样条插值
 
